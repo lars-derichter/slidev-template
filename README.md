@@ -3,6 +3,46 @@
 A clean, minimal [Slidev](https://sli.dev) starter set up to deploy to GitHub
 Pages.
 
+## Start a new presentation from this template
+
+Clone the template **into a folder named after your presentation** — that
+folder name becomes the GitHub repo name by default — then run `install.sh`:
+
+```bash
+git clone https://github.com/lars-derichter/slidev-template.git my-presentation
+cd my-presentation
+./install.sh
+```
+
+The script:
+
+- renames the template's remote to `upstream` (so you can pull future updates),
+- creates a new GitHub repo named after the folder,
+- sets it as `origin` and pushes,
+- enables GitHub Pages (source: GitHub Actions) — or prints instructions if it
+  can't,
+- adds the live presentation URL to the top of this README,
+- runs `npm install`.
+
+**Prerequisite:** the [GitHub CLI](https://cli.github.com/) (`gh`), installed
+and authenticated (`gh auth login`).
+
+**Flags:**
+
+| Flag                      | Effect                                              |
+| ------------------------- | --------------------------------------------------- |
+| `-r`, `--repository NAME` | Repo name to create, if different from the folder.  |
+| `--public` / `--private`  | Set visibility (default: prompt; Pages needs public).|
+| `--no-install`            | Skip `npm install`.                                 |
+| `-h`, `--help`            | Show usage.                                         |
+
+**Pull later template updates** (theme, workflow, tooling):
+
+```bash
+git fetch upstream
+git merge upstream/main
+```
+
 ## Develop
 
 ```bash
