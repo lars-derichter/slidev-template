@@ -75,6 +75,16 @@ author: William Strunk Jr.
 Vigorous writing is concise. A sentence should contain no unnecessary words.
 
 ---
+layout: image-side
+image: /forest.jpg
+eyebrow: Figure 2
+caption: A margin gives the eye somewhere to rest between ideas.
+credit: Photo · Unsplash
+---
+
+## Whitespace is part of the argument
+
+---
 layout: image-full
 image: /forest.jpg
 eyebrow: Figure 3
