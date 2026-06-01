@@ -29,12 +29,12 @@ and authenticated (`gh auth login`).
 
 **Flags:**
 
-| Flag                      | Effect                                              |
-| ------------------------- | --------------------------------------------------- |
-| `-r`, `--repository NAME` | Repo name to create, if different from the folder.  |
-| `--public` / `--private`  | Set visibility (default: prompt; Pages needs public).|
-| `--no-install`            | Skip `npm install`.                                 |
-| `-h`, `--help`            | Show usage.                                         |
+| Flag                      | Effect                                                |
+| ------------------------- | ----------------------------------------------------- |
+| `-r`, `--repository NAME` | Repo name to create, if different from the folder.    |
+| `--public` / `--private`  | Set visibility (default: prompt; Pages needs public). |
+| `--no-install`            | Skip `npm install`.                                   |
+| `-h`, `--help`            | Show usage.                                           |
 
 **Pull later template updates** (theme, workflow, tooling):
 
@@ -72,11 +72,11 @@ npm install github:lars-derichter/ldr-slidev-theme
 ```
 
 For stable presentations, pin a tagged release instead of tracking the branch.
-Tag the theme repo (`git tag v0.1.0 && git push --tags`), then set the
+Tag the theme repo (`git tag v1.1.0 && git push --tags`), then set the
 dependency in [package.json](package.json) to:
 
 ```json
-"slidev-theme-ldr": "github:lars-derichter/ldr-slidev-theme#v0.1.0"
+"slidev-theme-ldr": "github:lars-derichter/ldr-slidev-theme#v1.1.0"
 ```
 
 ## Build & export

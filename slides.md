@@ -32,29 +32,31 @@ Where a good sentence begins, and why the reader keeps reading.
 
 ## Three habits of clear prose
 
-- **One idea per sentence.** Let the full stop do its work before you reach for a comma.
+- **One idea per sentence.** Let the _full stop_ do its work before you reach for a comma.
 - **Concrete before abstract.** Name the thing, then explain what it means.
-- **Read it aloud.** If you run out of breath, the reader already has.
+- **Read it aloud.** If you run out of [breath,](https://example.com) the reader already has.
 
 ---
 layout: two-cols-ldr
 ---
 
-# Two ways to revise
+## Two ways to revise
 
 ::left::
 
-<div class="ldr-eyebrow" style="color: var(--ldr-sage)">Top down</div>
+Top down {.eyebrow.sage}
 
 Start from the claim. Check that every paragraph earns its place and serves the argument before you polish a single sentence.
 
 ::right::
 
-<div class="ldr-eyebrow" style="color: var(--ldr-maple)">Bottom up</div>
+Bottom up {.eyebrow.maple}
 
 Start from the words. Cut the dead ones, tighten the verbs, and let the structure reveal itself as the prose gets leaner.
 
 ---
+
+Example {.eyebrow}
 
 ## Calculate the average
 
