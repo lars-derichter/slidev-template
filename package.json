@@ -10,6 +10,7 @@
   "dependencies": {
     "@slidev/cli": "^52.10.1",
     "slidev-theme-ldr": "github:lars-derichter/ldr-slidev-theme#v1.1.0",
+    "slidev-theme-tm": "github:lars-derichter/tm-slidev-theme#v1.0.0",
     "vue": "^3.5.25"
   },
   "devDependencies": {
