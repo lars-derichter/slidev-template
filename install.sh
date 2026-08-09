@@ -5,6 +5,7 @@
 #
 # It will:
 #   - rename the template's remote to `upstream` (for pulling future updates)
+#   - activate the chosen theme's starter deck (ldr or tm)
 #   - create a new GitHub repo named after this folder (or --repository)
 #   - set it as `origin`, push, and enable GitHub Pages
 #   - add the live presentation URL to the top of README.md
@@ -43,6 +44,9 @@ Options:
       --public              Create a public repo (skip the prompt).
       --private             Create a private repo (skip the prompt).
                             Note: GitHub Pages needs a public repo on free plans.
+      --theme <ldr|tm>      Theme for the starter deck: ldr (personal) or
+                            tm (Thomas More). Default: prompt; ldr when
+                            not interactive.
       --no-install          Skip running `npm install` at the end.
   -h, --help                Show this help and exit.
 
@@ -56,6 +60,7 @@ EOF
 
 REPO_NAME=""
 VISIBILITY=""        # "public" | "private" | "" (prompt)
+THEME=""             # "ldr" | "tm" | "" (prompt)
 RUN_INSTALL=1
 
 while [[ $# -gt 0 ]]; do
@@ -71,12 +76,22 @@ while [[ $# -gt 0 ]]; do
       VISIBILITY="public"; shift ;;
     --private)
       VISIBILITY="private"; shift ;;
+    --theme)
+      [[ $# -ge 2 ]] || die "Option $1 requires a value."
+      THEME="$2"; shift 2 ;;
+    --theme=*)
+      THEME="${1#*=}"; shift ;;
     --no-install)
       RUN_INSTALL=0; shift ;;
     *)
       err "Unknown option: $1"; echo; usage; exit 1 ;;
   esac
 done
+
+case "$THEME" in
+  ""|ldr|tm) ;;
+  *) die "Invalid value for --theme: '$THEME' (expected ldr or tm)." ;;
+esac
 
 # --- preflight checks ------------------------------------------------------
 
@@ -158,6 +173,50 @@ if [[ -z "$VISIBILITY" ]]; then
   fi
 fi
 info "${BOLD}Visibility:${RESET} $VISIBILITY"
+
+# --- resolve theme ---------------------------------------------------------
+
+if [[ -z "$THEME" ]]; then
+  if [[ -t 0 ]]; then
+    info ""
+    info "Themes: ${BOLD}ldr${RESET} (personal) or ${BOLD}tm${RESET} (Thomas More)."
+    while :; do
+      read -r -p "Which theme? [ldr/tm] " answer
+      case "${answer:-ldr}" in
+        [Ll]*) THEME="ldr"; break ;;
+        [Tt]*) THEME="tm";  break ;;
+        *)     warn "Please answer 'ldr' or 'tm'." ;;
+      esac
+    done
+  else
+    THEME="ldr"
+  fi
+fi
+info "${BOLD}Theme:${RESET}      $THEME"
+
+# --- activate theme starter ------------------------------------------------
+
+TOPLEVEL="$(git rev-parse --show-toplevel)"
+if [[ "$THEME" == "tm" ]]; then
+  if [[ -f "$TOPLEVEL/slides-tm.md" ]]; then
+    mv -f "$TOPLEVEL/slides-tm.md" "$TOPLEVEL/slides.md"
+    ok "Activated the tm starter deck as slides.md."
+  else
+    info "tm starter already activated — skipping."
+  fi
+  rm -f "$TOPLEVEL/public/forest.jpg"
+else
+  rm -f "$TOPLEVEL/slides-tm.md" "$TOPLEVEL/public/demo.jpg"
+  ok "Keeping the ldr starter deck as slides.md."
+fi
+
+THEME_PATHS=("$TOPLEVEL/slides.md" "$TOPLEVEL/slides-tm.md"
+             "$TOPLEVEL/public/forest.jpg" "$TOPLEVEL/public/demo.jpg")
+if [[ -n "$(git status --porcelain -- "${THEME_PATHS[@]}")" ]]; then
+  git add -- "${THEME_PATHS[@]}"
+  git commit -m "Use the $THEME theme starter" >/dev/null
+  ok "Committed theme selection."
+fi
 
 # --- rename remote -> upstream --------------------------------------------
 
@@ -255,6 +314,7 @@ ${GREEN}${BOLD}Done!${RESET} Your presentation repo is ready.
   Repository: https://github.com/$TARGET
   Live deck:  $PAGES_URL
               (first deploy takes a minute — watch the Actions tab)
+  Theme:      $THEME (slides.md)
 
 Next steps:
   npm run dev        # start editing slides.md with live reload
