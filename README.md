@@ -16,6 +16,8 @@ cd my-presentation
 
 The script:
 
+- asks which theme to use (`ldr` or `tm`) and activates its starter deck as
+  `slides.md`, removing the other starter and its demo image,
 - renames the template's remote to `upstream` (so you can pull future updates),
 - creates a new GitHub repo named after the folder,
 - sets it as `origin` and pushes,
@@ -33,6 +35,7 @@ and authenticated (`gh auth login`).
 | ------------------------- | ----------------------------------------------------- |
 | `-r`, `--repository NAME` | Repo name to create, if different from the folder.    |
 | `--public` / `--private`  | Set visibility (default: prompt; Pages needs public). |
+| `--theme <ldr\|tm>`       | Choose the starter theme (default: prompt).           |
 | `--no-install`            | Skip `npm install`.                                   |
 | `-h`, `--help`            | Show usage.                                           |
 
@@ -52,32 +55,44 @@ npm run dev
 
 Edit [slides.md](slides.md); the browser updates on save.
 
-## Theme
-
-This deck uses the custom theme
-[`slidev-theme-ldr`](https://github.com/lars-derichter/ldr-slidev-theme),
-installed as a Git dependency (`theme: ldr` in [slides.md](slides.md)).
-
-Git dependencies do **not** auto-update. After pushing new commits to the
-theme, pull them into this deck with:
+The repo starts with the ldr deck as `slides.md`; the tm starter lives in
+[slides-tm.md](slides-tm.md) until `install.sh` runs. Preview it with:
 
 ```bash
-npm update slidev-theme-ldr   # re-fetches the tracked branch
+npx slidev slides-tm.md --open
 ```
 
-If that doesn't pick up the change, force a clean re-fetch:
+## Themes
+
+Two custom themes are installed as pinned Git dependencies:
+
+| Theme       | Package            | Repo                                                                    | Frontmatter  |
+| ----------- | ------------------ | ----------------------------------------------------------------------- | ------------ |
+| Personal    | `slidev-theme-ldr` | [ldr-slidev-theme](https://github.com/lars-derichter/ldr-slidev-theme)  | `theme: ldr` |
+| Thomas More | `slidev-theme-tm`  | [tm-slidev-theme](https://github.com/lars-derichter/tm-slidev-theme)    | `theme: tm`  |
+
+`install.sh` asks which one to use (or takes `--theme`) and activates that
+theme's starter deck as `slides.md`, removing the other starter and its demo
+image. Both packages stay in [package.json](package.json) — the unused
+dependency is harmless.
+
+Without `install.sh`, switch to the tm starter manually:
 
 ```bash
-npm install github:lars-derichter/ldr-slidev-theme
+mv slides-tm.md slides.md   # optionally: rm public/forest.jpg
 ```
 
-For stable presentations, pin a tagged release instead of tracking the branch.
-Tag the theme repo (`git tag v1.1.0 && git push --tags`), then set the
-dependency in [package.json](package.json) to:
+**Updating a theme.** The dependencies are pinned to tags (`#v1.1.0` /
+`#v1.0.0`), so `npm update` will not move them. To pull in theme changes, tag
+a new release in the theme repo (`git tag v1.2.0 && git push --tags`), bump
+the pin in [package.json](package.json), and run `npm install`.
 
-```json
-"slidev-theme-ldr": "github:lars-derichter/ldr-slidev-theme#v1.1.0"
-```
+**Switching an existing deck's theme** takes more than editing `theme:` in
+the frontmatter: the layout names differ (`two-cols-ldr` vs `two-cols-tm`;
+only tm has the `toc` layout with its `hideInToc`/`level` keys and the
+`color: white | orange | navy` colorways), and so do the accent classes
+(ldr's `.sage`/`.maple` vs tm's `.teal`/`.green`/`.navy`). Use each theme's
+example deck as the reference.
 
 ## Build & export
 
