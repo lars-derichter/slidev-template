@@ -5,8 +5,8 @@ Pages.
 
 ## Start a new presentation from this template
 
-Clone the template **into a folder named after your presentation** — that
-folder name becomes the GitHub repo name by default — then run `install.sh`:
+Clone the template **into a folder named after your presentation** — that folder
+name becomes the GitHub repo name by default — then run `install.sh`:
 
 ```bash
 git clone https://github.com/lars-derichter/slidev-template.git my-presentation
@@ -66,10 +66,10 @@ npx slidev slides-tm.md --open
 
 Two custom themes are installed as pinned Git dependencies:
 
-| Theme       | Package            | Repo                                                                    | Frontmatter  |
-| ----------- | ------------------ | ----------------------------------------------------------------------- | ------------ |
-| Personal    | `slidev-theme-ldr` | [ldr-slidev-theme](https://github.com/lars-derichter/ldr-slidev-theme)  | `theme: ldr` |
-| Thomas More | `slidev-theme-tm`  | [tm-slidev-theme](https://github.com/lars-derichter/tm-slidev-theme)    | `theme: tm`  |
+| Theme       | Package            | Repo                                                                   | Frontmatter  |
+| ----------- | ------------------ | ---------------------------------------------------------------------- | ------------ |
+| Personal    | `slidev-theme-ldr` | [ldr-slidev-theme](https://github.com/lars-derichter/ldr-slidev-theme) | `theme: ldr` |
+| Thomas More | `slidev-theme-tm`  | [tm-slidev-theme](https://github.com/lars-derichter/tm-slidev-theme)   | `theme: tm`  |
 
 `install.sh` asks which one to use (or takes `--theme`) and activates that
 theme's starter deck as `slides.md`, removing the other starter and its demo
@@ -83,16 +83,16 @@ mv slides-tm.md slides.md   # optionally: rm public/forest.jpg
 ```
 
 **Updating a theme.** The dependencies are pinned to tags (`#v1.1.0` /
-`#v1.0.0`), so `npm update` will not move them. To pull in theme changes, tag
-a new release in the theme repo (`git tag v1.2.0 && git push --tags`), bump
-the pin in [package.json](package.json), and run `npm install`.
+`#v1.0.0`), so `npm update` will not move them. To pull in theme changes, tag a
+new release in the theme repo (`git tag v1.2.0 && git push --tags`), bump the
+pin in [package.json](package.json), and run `npm install`.
 
-**Switching an existing deck's theme** takes more than editing `theme:` in
-the frontmatter: the layout names differ (`two-cols-ldr` vs `two-cols-tm`;
-only tm has the `toc` layout with its `hideInToc`/`level` keys and the
-`color: white | orange | navy` colorways), and so do the accent classes
-(ldr's `.sage`/`.maple` vs tm's `.teal`/`.green`/`.navy`). Use each theme's
-example deck as the reference.
+**Switching an existing deck's theme** takes more than editing `theme:` in the
+frontmatter: the layout names differ (`two-cols-ldr` vs `two-cols-tm`; only tm
+has the `toc` layout with its `hideInToc`/`level` keys and the
+`color: white | orange | navy` colorways), and so do the accent classes (ldr's
+`.sage`/`.maple` vs tm's `.teal`/`.green`/`.navy`). Use each theme's example
+deck as the reference.
 
 ## Build & export
 
