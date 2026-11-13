@@ -1,10 +1,15 @@
 {
   "overrides": [
     {
+      "files": ["*.md"],
+      "options": { "proseWrap": "always" }
+    },
+    {
       "files": ["slides.md", "slides-*.md", "pages/*.md"],
       "options": {
         "parser": "slidev",
-        "plugins": ["prettier-plugin-slidev"]
+        "plugins": ["prettier-plugin-slidev"],
+        "proseWrap": "preserve"
       }
     }
   ]
