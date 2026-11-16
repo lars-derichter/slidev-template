@@ -21,8 +21,8 @@ npm run export   # PDF export
 
 Two custom themes are installed as **pinned Git dependencies** (see
 [package.json](package.json)): `slidev-theme-ldr`
-(`github:lars-derichter/ldr-slidev-theme#v1.1.0`, `theme: ldr`) and
-`slidev-theme-tm` (`github:lars-derichter/tm-slidev-theme#v1.0.0`, `theme: tm`).
+(`github:lars-derichter/ldr-slidev-theme#v1.2.2`, `theme: ldr`) and
+`slidev-theme-tm` (`github:lars-derichter/tm-slidev-theme#v1.0.1`, `theme: tm`).
 
 - `install.sh --theme ldr|tm` (or its prompt) activates one starter deck as
   `slides.md` and deletes the other starter plus its demo image. Both deps stay

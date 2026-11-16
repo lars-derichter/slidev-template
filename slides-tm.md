@@ -7,7 +7,7 @@ info: |
 mdc: true
 layout: cover
 eyebrow: Graduaat programmeren
-presenter: Lars De Richter
+author: Lars De Richter
 affiliation: Thomas More
 hideInToc: true
 ---
@@ -102,7 +102,7 @@ Deze slide is perfect voor citaten of andere korte teksten.
 layout: cover
 color: orange
 eyebrow: Colorway demo
-presenter: Lars De Richter
+author: Lars De Richter
 affiliation: Thomas More
 hideInToc: true
 ---
